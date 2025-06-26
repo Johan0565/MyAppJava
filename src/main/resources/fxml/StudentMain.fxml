@@ -20,7 +20,7 @@
                 <PasswordField fx:id="passwordField" promptText="Новый пароль" style="-fx-pref-width: 200px;"/>
                 <HBox spacing="10" alignment="CENTER">
                     <Button fx:id="saveProfileButton" text="Сохранить изменения" onAction="#handleSaveProfile" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="expelButton" text="Отчислиться" onAction="#handleExpel" style="-fx-pref-width: 100px;"/>
+                    <Button fx:id="expelButton" text="Отчислиться" onAction="#handleExpel" style="-fx-background-color: #00FF7F;"/>
                 </HBox>
             </VBox>
         </Tab>

@@ -4,12 +4,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" maxWidth="300" spacing="15" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myappjava.Controllers.RegistrationController">
+<VBox alignment="CENTER" maxWidth="300" spacing="15" style="-fx-background-color: #696969;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myappjava.Controllers.RegistrationController">
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
     <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Регистрация" />
-    <ComboBox fx:id="roleComboBox" prefHeight="25.0" prefWidth="233.0" promptText="Выберите роль" style="-fx-pref-width: 200px;" />
+    <ComboBox fx:id="roleComboBox" prefHeight="25.0" prefWidth="233.0" promptText="Выберите роль" style="-fx-pref-width: 200px; -fx-background-color: #C0C0C0;" />
     <TextField fx:id="usernameField" promptText="Имя пользователя" style="-fx-pref-width: 200px;" />
     <PasswordField fx:id="passwordField" promptText="Пароль" style="-fx-pref-width: 200px;" />
     <TextField fx:id="nameField" promptText="Имя" style="-fx-pref-width: 200px;" visible="false" />
@@ -19,7 +19,7 @@
     <TextField fx:id="addressField" promptText="Адрес" style="-fx-pref-width: 200px;" visible="false" />
     <TextField fx:id="masterKeyField" promptText="Мастер-ключ (для админа)" style="-fx-pref-width: 200px;" visible="false" />
     <HBox alignment="CENTER" spacing="10">
-        <Button fx:id="registerButton" onAction="#handleRegister" style="-fx-pref-width: 100px;" text="Зарегистрироваться" />
-        <Button fx:id="backButton" onAction="#handleBack" style="-fx-pref-width: 100px;" text="Назад" />
+        <Button fx:id="registerButton" onAction="#handleRegister" style="-fx-pref-width: 100px; -fx-background-color: #C0C0C0;" text="Зарегистрироваться" />
+        <Button fx:id="backButton" onAction="#handleBack" style="-fx-pref-width: 100px; -fx-background-color: #C0C0C0;" text="Назад" />
     </HBox>
 </VBox>
