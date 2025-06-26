@@ -1,6 +1,5 @@
 package myappjava;
 
-import Models.Users;
 import Models.Entities.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,92 +11,71 @@ import myappjava.Controllers.RegistrationController;
 import myappjava.Controllers.StudentMainController;
 import myappjava.Controllers.TeacherMainController;
 import myappjava.Controllers.AdminMainController;
-
-import java.util.HashMap;
-import java.util.Map;
+import javafx.scene.image.Image;
+import java.io.IOException;
 
 public class UniversityApp extends Application {
+
     private Stage primaryStage;
-    private Map<String, Scene> scenes = new HashMap<>();
-    private Users usersModel = Users.getInstance();
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        primaryStage.setTitle("University App");
+        primaryStage.setTitle("University");
 
-        // Загрузка Login.fxml
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
-        Pane view = loader.load();
-        LoginController loginController = loader.getController();
-        loginController.setDependencies(view, usersModel, this);
-        scenes.put("login", new Scene(view));
+        try {
+            Image icon = new Image(getClass().getResourceAsStream("/images/icon.png"));
+            primaryStage.getIcons().add(icon);
+        } catch (Exception e) {
+            System.err.println("Ошибка загрузки иконки: " + e.getMessage());
+        }
 
-        // Загрузка Registration.fxml
-        loader = new FXMLLoader(getClass().getResource("/fxml/Registration.fxml"));
-        view = loader.load();
-        RegistrationController regController = loader.getController();
-        regController.setDependencies(view, this);
-        scenes.put("registration", new Scene(view));
-
+        // Загрузка начальной сцены (например, Login)
         showScene("login");
     }
 
-    public void showScene(String sceneName, User user) {
-        Scene scene = scenes.get(sceneName);
-        if (sceneName.equals("studentMain") && user != null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/StudentMain.fxml"));
-                System.out.println("Loading StudentMain.fxml: " + getClass().getResource("/fxml/StudentMain.fxml"));
-                Pane view = loader.load();
-                StudentMainController controller = loader.getController();
-                controller.setDependencies(view, this, user);
-                scene = new Scene(view);
-                scenes.put("studentMain", scene);
-            } catch (Exception e) {
-                System.err.println("Failed to load studentMain: " + e.getMessage());
-                e.printStackTrace();
-                return;
-            }
-        } else if (sceneName.equals("teacherMain") && user != null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TeacherMain.fxml"));
-                System.out.println("Loading TeacherMain.fxml: " + getClass().getResource("/fxml/TeacherMain.fxml"));
-                Pane view = loader.load();
-                TeacherMainController controller = loader.getController();
-                controller.setDependencies(view, this, user);
-                scene = new Scene(view);
-                scenes.put("teacherMain", scene);
-            } catch (Exception e) {
-                System.err.println("Failed to load teacherMain: " + e.getMessage());
-                e.printStackTrace();
-                return;
-            }
-        } else if (sceneName.equals("adminMain") && user != null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminMain.fxml"));
-                System.out.println("Loading AdminMain.fxml: " + getClass().getResource("/fxml/AdminMain.fxml"));
-                Pane view = loader.load();
+    public void showScene(String fxmlFile, User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlFile + ".fxml"));
+            Pane root = loader.load();
+
+            // Настройка контроллера
+            if (fxmlFile.equals("login")) {
+                LoginController controller = loader.getController();
+                controller.setDependencies(root, Models.Users.getInstance(), this);
+            } else if (fxmlFile.equals("adminMain")) {
                 AdminMainController controller = loader.getController();
-                controller.setDependencies(view, this, user);
-                scene = new Scene(view);
-                scenes.put("adminMain", scene);
-            } catch (Exception e) {
-                System.err.println("Failed to load adminMain: " + e.getMessage());
-                e.printStackTrace();
-                return;
+                controller.setDependencies(root, this, user);
+            } else if (fxmlFile.equals("studentMain")) {
+                StudentMainController controller = loader.getController();
+                controller.setDependencies(root, this, user);
+            } else if (fxmlFile.equals("teacherMain")) {
+                TeacherMainController controller = loader.getController();
+                controller.setDependencies(root, this, user);
+            } else if (fxmlFile.equals("registration")) {
+                RegistrationController controller = loader.getController();
+                controller.setDependencies(root, this);
             }
-        }
-        if (scene != null) {
+
+            Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
-        } else {
-            System.err.println("Scene not found: " + sceneName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Ошибка", "Не удалось загрузить сцену: " + fxmlFile);
         }
     }
 
-    public void showScene(String sceneName) {
-        showScene(sceneName, null);
+    public void showScene(String fxmlFile) {
+        showScene(fxmlFile, null);
+    }
+
+    private void showAlert(String title, String message) {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public static void main(String[] args) {
