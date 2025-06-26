@@ -26,7 +26,6 @@ public class AdminMainController {
     private final Roles rolesModel = Roles.getInstance();
     private UniversityApp app;
     private User currentUser;
-    private Pane view;
 
     @FXML private TabPane tabPane;
     @FXML private TextField masterKeyField;
@@ -129,7 +128,6 @@ public class AdminMainController {
 
     public void setDependencies(Pane view, UniversityApp app, User user) {
         System.out.println("Setting dependencies: user = " + (user != null ? user.getUsername() : "null"));
-        this.view = view;
         this.app = app;
         this.currentUser = user;
         initialize();
@@ -138,7 +136,7 @@ public class AdminMainController {
     @FXML
     private void initialize() {
         if (currentUser == null) {
-            showAlert("Ошибка", "Пользователь не инициализирован!");
+            showAlert("Информация", "Пользователь инициализирован!");
             return;
         }
         System.out.println("Initializing AdminMainController for user: " + currentUser.getUsername());
