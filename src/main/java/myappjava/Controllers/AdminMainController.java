@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import myappjava.StringHasher;
 import myappjava.UniversityApp;
 
 import java.sql.Date;
@@ -27,28 +28,18 @@ public class AdminMainController {
     private UniversityApp app;
     private User currentUser;
 
-    @FXML private TabPane tabPane;
-    @FXML private TextField masterKeyField;
-    @FXML private Button changeMasterKeyButton;
     @FXML private TextField personalPasswordField;
-    @FXML private Button changePersonalPasswordButton;
     @FXML private TextField userIdField;
     @FXML private TextField userPasswordField;
-    @FXML private Button changeUserPasswordButton;
     @FXML private TextField filterUserIdField;
     @FXML private TextField filterUsernameField;
-    @FXML private Button filterUsersButton;
     @FXML private TableView<User> usersTable;
     @FXML private TableColumn<User, String> userIdColumn;
     @FXML private TableColumn<User, String> usernameColumn;
     @FXML private TableColumn<User, String> roleIdColumn;
     @FXML private TableColumn<User, String> studentIdColumn;
-    @FXML private Button createUserButton;
-    @FXML private Button editUserButton;
-    @FXML private Button deleteUserButton;
     @FXML private TextField filterStudentIdField;
     @FXML private TextField filterStudentNameField;
-    @FXML private Button filterStudentsButton;
     @FXML private TableView<Student> studentsTable;
     @FXML private TableColumn<Student, String> studentIdTableColumn;
     @FXML private TableColumn<Student, String> nameColumn;
@@ -56,12 +47,8 @@ public class AdminMainController {
     @FXML private TableColumn<Student, String> patronymicColumn;
     @FXML private TableColumn<Student, String> phoneColumn;
     @FXML private TableColumn<Student, String> addressColumn;
-    @FXML private Button createStudentButton;
-    @FXML private Button editStudentButton;
-    @FXML private Button deleteStudentButton;
     @FXML private TextField filterEnrollmentIdField;
     @FXML private TextField filterEnrollmentStudentIdField;
-    @FXML private Button filterEnrollmentsButton;
     @FXML private TableView<Enrollment> enrollmentsTable;
     @FXML private TableColumn<Enrollment, String> enrollmentIdColumn;
     @FXML private TableColumn<Enrollment, String> enrollmentStudentIdColumn;
@@ -69,21 +56,14 @@ public class AdminMainController {
     @FXML private TableColumn<Enrollment, String> enrollmentSemesterIdColumn;
     @FXML private TableColumn<Enrollment, String> gradeColumn;
     @FXML private TableColumn<Enrollment, String> gradeDateColumn;
-    @FXML private Button createEnrollmentButton;
-    @FXML private Button editEnrollmentButton;
-    @FXML private Button deleteEnrollmentButton;
     @FXML private TextField filterElectiveIdField;
     @FXML private TextField filterElectiveNameField;
-    @FXML private Button filterElectivesButton;
     @FXML private TableView<Elective> electivesTable;
     @FXML private TableColumn<Elective, String> electiveIdTableColumn;
     @FXML private TableColumn<Elective, String> electiveNameColumn;
-    @FXML private Button createElectiveButton;
-    @FXML private Button editElectiveButton;
-    @FXML private Button deleteElectiveButton;
+    @FXML private TableColumn<Elective, String> durationColumn;
     @FXML private TextField filterPlanIdField;
     @FXML private TextField filterPlanElectiveIdField;
-    @FXML private Button filterElectivePlansButton;
     @FXML private TableView<ElectivePlan> electivePlansTable;
     @FXML private TableColumn<ElectivePlan, String> planIdColumn;
     @FXML private TableColumn<ElectivePlan, String> planElectiveIdColumn;
@@ -91,36 +71,22 @@ public class AdminMainController {
     @FXML private TableColumn<ElectivePlan, String> lecturesColumn;
     @FXML private TableColumn<ElectivePlan, String> practicesColumn;
     @FXML private TableColumn<ElectivePlan, String> labsColumn;
-    @FXML private Button createElectivePlanButton;
-    @FXML private Button editElectivePlanButton;
-    @FXML private Button deleteElectivePlanButton;
     @FXML private TextField filterSemesterIdField;
     @FXML private TextField filterSemesterYearField;
-    @FXML private Button filterSemestersButton;
     @FXML private TableView<Semester> semestersTable;
     @FXML private TableColumn<Semester, String> semesterIdColumn;
     @FXML private TableColumn<Semester, String> yearColumn;
     @FXML private TableColumn<Semester, String> semesterNumberColumn;
-    @FXML private Button createSemesterButton;
-    @FXML private Button editSemesterButton;
-    @FXML private Button deleteSemesterButton;
     @FXML private TextField filterDepartmentNameField;
-    @FXML private Button filterDepartmentsButton;
     @FXML private TableView<Department> departmentsTable;
     @FXML private TableColumn<Department, String> departmentNameTableColumn;
     @FXML private TableColumn<Department, String> departmentElectiveIdColumn;
-    @FXML private Button createDepartmentButton;
-    @FXML private Button editDepartmentButton;
-    @FXML private Button deleteDepartmentButton;
     @FXML private TextField filterPostIdField;
     @FXML private TextField filterPostNameField;
-    @FXML private Button filterPostsButton;
     @FXML private TableView<Post> postsTable;
     @FXML private TableColumn<Post, String> postIdColumn;
     @FXML private TableColumn<Post, String> postNameColumn;
-    @FXML private Button createPostButton;
-    @FXML private Button editPostButton;
-    @FXML private Button deletePostButton;
+
 
     public AdminMainController() {
         this.app = null;
@@ -165,6 +131,7 @@ public class AdminMainController {
 
         electiveIdTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getElectiveId())));
         electiveNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getElectiveName()));
+        durationColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getDurationInSemesters())));
         loadElectives();
 
         planIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getPlanId())));
@@ -187,19 +154,6 @@ public class AdminMainController {
         postIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getPostId())));
         postNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPostName()));
         loadPosts();
-    }
-
-    @FXML
-    private void handleChangeMasterKey() {
-        String newMasterKey = masterKeyField.getText();
-        if (newMasterKey.isEmpty()) {
-            showAlert("Ошибка", "Введите новый мастер-ключ!");
-            return;
-        }
-        myappjava.Controllers.LoginController.setMasterKey(newMasterKey);
-        myappjava.Controllers.RegistrationController.setMasterKey(newMasterKey);
-        showAlert("Успех", "Мастер-ключ успешно изменен!");
-        masterKeyField.clear();
     }
 
     @FXML
@@ -642,18 +596,27 @@ public class AdminMainController {
 
         DialogPane dialogPane = dialog.getDialogPane();
         TextField nameField = new TextField();
-        VBox content = new VBox(10, new Label("Название:"), nameField);
+        TextField durationField = new TextField();
+        VBox content = new VBox(10, new Label("Название:"), nameField, new Label("Продолжительность (в семестрах):"), durationField);
         dialogPane.setContent(content);
         dialogPane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
         dialog.setResultConverter(button -> {
             if (button == ButtonType.OK) {
-                String name = nameField.getText();
-                if (name.isEmpty()) {
-                    showAlert("Ошибка", "Название не может быть пустым!");
+                try {
+                    String name = nameField.getText();
+                    int duration = Integer.parseInt(durationField.getText());
+                    if (name.isEmpty()) {
+                        throw new IllegalArgumentException("Название не может быть пустым!");
+                    }
+                    if (duration <= 0) {
+                        throw new IllegalArgumentException("Продолжительность должна быть больше 0!");
+                    }
+                    return new Elective(0, name, duration);
+                } catch (IllegalArgumentException e) {
+                    showAlert("Ошибка", e.getMessage());
                     return null;
                 }
-                return new Elective(0, name);
             }
             return null;
         });
@@ -679,18 +642,27 @@ public class AdminMainController {
 
         DialogPane dialogPane = dialog.getDialogPane();
         TextField nameField = new TextField(selectedElective.getElectiveName());
-        VBox content = new VBox(10, new Label("Название:"), nameField);
+        TextField durationField = new TextField(String.valueOf(selectedElective.getDurationInSemesters()));
+        VBox content = new VBox(10, new Label("Название:"), nameField, new Label("Продолжительность (в семестрах):"), durationField);
         dialogPane.setContent(content);
         dialogPane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
         dialog.setResultConverter(button -> {
             if (button == ButtonType.OK) {
-                String name = nameField.getText();
-                if (name.isEmpty()) {
-                    showAlert("Ошибка", "Название не может быть пустым!");
+                try {
+                    String name = nameField.getText();
+                    int duration = Integer.parseInt(durationField.getText());
+                    if (name.isEmpty()) {
+                        throw new IllegalArgumentException("Название не может быть пустым!");
+                    }
+                    if (duration <= 0) {
+                        throw new IllegalArgumentException("Продолжительность должна быть больше 0!");
+                    }
+                    return new Elective(selectedElective.getElectiveId(), name, duration);
+                } catch (IllegalArgumentException e) {
+                    showAlert("Ошибка", e.getMessage());
                     return null;
                 }
-                return new Elective(selectedElective.getElectiveId(), name);
             }
             return null;
         });
@@ -1162,7 +1134,7 @@ public class AdminMainController {
     private void handleDeletePost() {
         Post selectedPost = postsTable.getSelectionModel().getSelectedItem();
         if (selectedPost == null) {
-            showAlert("Ошибка", "Выберите роль для удаления!");
+            showAlert("Ошибка", "Выберите роль для редактирования!");
             return;
         }
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -1185,7 +1157,9 @@ public class AdminMainController {
             Integer postId = postIdText.isEmpty() ? null : Integer.parseInt(postIdText);
             List<Post> filteredPosts = rolesModel.getAll().stream()
                     .filter(post -> {
-                        boolean matchesId = postId == null || post.getPostId() == postId;
+                        boolean matchesId = postId == null ||
+
+                                post.getPostId() == postId;
                         boolean matchesName = nameText.isEmpty() || post.getPostName().toLowerCase().contains(nameText.toLowerCase());
                         return matchesId && matchesName;
                     })
@@ -1229,7 +1203,7 @@ public class AdminMainController {
     }
 
     private String hashPassword(String password) {
-        return password;
+        return StringHasher.hashString(password);
     }
 
     private void showAlert(String title, String message) {
