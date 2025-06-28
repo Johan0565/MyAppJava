@@ -1,202 +1,201 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.geometry.Insets?>
+
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="myappjava.Controllers.AdminMainController" spacing="10" style="-fx-background-color: #f4f4f4;">
+<VBox spacing="10" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myappjava.Controllers.AdminMainController">
     <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
+        <Insets bottom="10" left="10" right="10" top="10" />
     </padding>
-    <Label text="Панель администратора" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Панель администратора" />
     <TabPane fx:id="tabPane" style="-fx-pref-width: 800px; -fx-pref-height: 500px;">
         <Tab text="Управление паролями">
-            <VBox spacing="10" alignment="CENTER">
-                <HBox spacing="10" alignment="CENTER">
-                    <TextField fx:id="masterKeyField" promptText="Новый мастер-ключ" style="-fx-pref-width: 200px;"/>
-                    <Button fx:id="changeMasterKeyButton" text="Сменить мастер-ключ" onAction="#handleChangeMasterKey" style="-fx-pref-width: 150px;"/>
+            <VBox alignment="CENTER" spacing="10">
+                <HBox alignment="CENTER" spacing="10" />
+                <HBox alignment="CENTER" spacing="10">
+                    <TextField fx:id="personalPasswordField" promptText="Новый личный пароль" style="-fx-pref-width: 200px;" />
+                    <Button fx:id="changePersonalPasswordButton" onAction="#handleChangePersonalPassword" style="-fx-pref-width: 150px;" text="Сменить личный пароль" />
                 </HBox>
-                <HBox spacing="10" alignment="CENTER">
-                    <TextField fx:id="personalPasswordField" promptText="Новый личный пароль" style="-fx-pref-width: 200px;"/>
-                    <Button fx:id="changePersonalPasswordButton" text="Сменить личный пароль" onAction="#handleChangePersonalPassword" style="-fx-pref-width: 150px;"/>
-                </HBox>
-                <HBox spacing="10" alignment="CENTER">
-                    <TextField fx:id="userIdField" promptText="ID пользователя" style="-fx-pref-width: 100px;"/>
-                    <TextField fx:id="userPasswordField" promptText="Новый пароль" style="-fx-pref-width: 200px;"/>
-                    <Button fx:id="changeUserPasswordButton" text="Сменить пароль пользователя" onAction="#handleChangeUserPassword" style="-fx-pref-width: 150px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <TextField fx:id="userIdField" promptText="ID пользователя" style="-fx-pref-width: 100px;" />
+                    <TextField fx:id="userPasswordField" promptText="Новый пароль" style="-fx-pref-width: 200px;" />
+                    <Button fx:id="changeUserPasswordButton" onAction="#handleChangeUserPassword" style="-fx-pref-width: 150px;" text="Сменить пароль пользователя" />
                 </HBox>
             </VBox>
         </Tab>
         <Tab text="Пользователи">
             <VBox spacing="10">
-                <HBox spacing="10" alignment="CENTER">
-                    <TextField fx:id="filterUserIdField" promptText="ID пользователя" style="-fx-pref-width: 100px;"/>
-                    <TextField fx:id="filterUsernameField" promptText="Имя пользователя" style="-fx-pref-width: 150px;"/>
-                    <Button fx:id="filterUsersButton" text="Фильтр" onAction="#handleFilterUsers" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <TextField fx:id="filterUserIdField" promptText="ID пользователя" style="-fx-pref-width: 100px;" />
+                    <TextField fx:id="filterUsernameField" promptText="Имя пользователя" style="-fx-pref-width: 150px;" />
+                    <Button fx:id="filterUsersButton" onAction="#handleFilterUsers" style="-fx-pref-width: 100px;" text="Фильтр" />
                 </HBox>
                 <TableView fx:id="usersTable" style="-fx-pref-height: 350px;">
                     <columns>
-                        <TableColumn fx:id="userIdColumn" text="ID" style="-fx-pref-width: 50px;"/>
-                        <TableColumn fx:id="usernameColumn" text="Имя пользователя" style="-fx-pref-width: 150px;"/>
-                        <TableColumn fx:id="roleIdColumn" text="ID роли" style="-fx-pref-width: 80px;"/>
-                        <TableColumn fx:id="studentIdColumn" text="ID студента" style="-fx-pref-width: 80px;"/>
+                        <TableColumn fx:id="userIdColumn" style="-fx-pref-width: 50px;" text="ID" />
+                        <TableColumn fx:id="usernameColumn" style="-fx-pref-width: 150px;" text="Имя пользователя" />
+                        <TableColumn fx:id="roleIdColumn" style="-fx-pref-width: 80px;" text="ID роли" />
+                        <TableColumn fx:id="studentIdColumn" style="-fx-pref-width: 80px;" text="ID студента" />
                     </columns>
                 </TableView>
-                <HBox spacing="10" alignment="CENTER">
-                    <Button fx:id="createUserButton" text="Создать" onAction="#handleCreateUser" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="editUserButton" text="Редактировать" onAction="#handleEditUser" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="deleteUserButton" text="Удалить" onAction="#handleDeleteUser" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <Button fx:id="createUserButton" onAction="#handleCreateUser" style="-fx-pref-width: 100px;" text="Создать" />
+                    <Button fx:id="editUserButton" onAction="#handleEditUser" style="-fx-pref-width: 100px;" text="Редактировать" />
+                    <Button fx:id="deleteUserButton" onAction="#handleDeleteUser" style="-fx-pref-width: 100px;" text="Удалить" />
                 </HBox>
             </VBox>
         </Tab>
         <Tab text="Студенты">
             <VBox spacing="10">
-                <HBox spacing="10" alignment="CENTER">
-                    <TextField fx:id="filterStudentIdField" promptText="ID студента" style="-fx-pref-width: 100px;"/>
-                    <TextField fx:id="filterStudentNameField" promptText="Имя или фамилия" style="-fx-pref-width: 150px;"/>
-                    <Button fx:id="filterStudentsButton" text="Фильтр" onAction="#handleFilterStudents" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <TextField fx:id="filterStudentIdField" promptText="ID студента" style="-fx-pref-width: 100px;" />
+                    <TextField fx:id="filterStudentNameField" promptText="Имя или фамилия" style="-fx-pref-width: 150px;" />
+                    <Button fx:id="filterStudentsButton" onAction="#handleFilterStudents" style="-fx-pref-width: 100px;" text="Фильтр" />
                 </HBox>
                 <TableView fx:id="studentsTable" style="-fx-pref-height: 350px;">
                     <columns>
-                        <TableColumn fx:id="studentIdTableColumn" text="ID" style="-fx-pref-width: 50px;"/>
-                        <TableColumn fx:id="nameColumn" text="Имя" style="-fx-pref-width: 100px;"/>
-                        <TableColumn fx:id="lastNameColumn" text="Фамилия" style="-fx-pref-width: 100px;"/>
-                        <TableColumn fx:id="patronymicColumn" text="Отчество" style="-fx-pref-width: 100px;"/>
-                        <TableColumn fx:id="phoneColumn" text="Телефон" style="-fx-pref-width: 100px;"/>
-                        <TableColumn fx:id="addressColumn" text="Адрес" style="-fx-pref-width: 150px;"/>
+                        <TableColumn fx:id="studentIdTableColumn" style="-fx-pref-width: 50px;" text="ID" />
+                        <TableColumn fx:id="nameColumn" style="-fx-pref-width: 100px;" text="Имя" />
+                        <TableColumn fx:id="lastNameColumn" style="-fx-pref-width: 100px;" text="Фамилия" />
+                        <TableColumn fx:id="patronymicColumn" style="-fx-pref-width: 100px;" text="Отчество" />
+                        <TableColumn fx:id="phoneColumn" style="-fx-pref-width: 100px;" text="Телефон" />
+                        <TableColumn fx:id="addressColumn" style="-fx-pref-width: 150px;" text="Адрес" />
                     </columns>
                 </TableView>
-                <HBox spacing="10" alignment="CENTER">
-                    <Button fx:id="createStudentButton" text="Создать" onAction="#handleCreateStudent" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="editStudentButton" text="Редактировать" onAction="#handleEditStudent" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="deleteStudentButton" text="Удалить" onAction="#handleDeleteStudent" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <Button fx:id="createStudentButton" onAction="#handleCreateStudent" style="-fx-pref-width: 100px;" text="Создать" />
+                    <Button fx:id="editStudentButton" onAction="#handleEditStudent" style="-fx-pref-width: 100px;" text="Редактировать" />
+                    <Button fx:id="deleteStudentButton" onAction="#handleDeleteStudent" style="-fx-pref-width: 100px;" text="Удалить" />
                 </HBox>
             </VBox>
         </Tab>
         <Tab text="Записи">
             <VBox spacing="10">
-                <HBox spacing="10" alignment="CENTER">
-                    <TextField fx:id="filterEnrollmentIdField" promptText="ID записи" style="-fx-pref-width: 100px;"/>
-                    <TextField fx:id="filterEnrollmentStudentIdField" promptText="ID студента" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="filterEnrollmentsButton" text="Фильтр" onAction="#handleFilterEnrollments" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <TextField fx:id="filterEnrollmentIdField" promptText="ID записи" style="-fx-pref-width: 100px;" />
+                    <TextField fx:id="filterEnrollmentStudentIdField" promptText="ID студента" style="-fx-pref-width: 100px;" />
+                    <Button fx:id="filterEnrollmentsButton" onAction="#handleFilterEnrollments" style="-fx-pref-width: 100px;" text="Фильтр" />
                 </HBox>
                 <TableView fx:id="enrollmentsTable" style="-fx-pref-height: 350px;">
                     <columns>
-                        <TableColumn fx:id="enrollmentIdColumn" text="ID" style="-fx-pref-width: 50px;"/>
-                        <TableColumn fx:id="enrollmentStudentIdColumn" text="ID студента" style="-fx-pref-width: 80px;"/>
-                        <TableColumn fx:id="enrollmentElectiveIdColumn" text="ID факультатива" style="-fx-pref-width: 80px;"/>
-                        <TableColumn fx:id="enrollmentSemesterIdColumn" text="ID семестра" style="-fx-pref-width: 80px;"/>
-                        <TableColumn fx:id="gradeColumn" text="Оценка" style="-fx-pref-width: 80px;"/>
-                        <TableColumn fx:id="gradeDateColumn" text="Дата оценки" style="-fx-pref-width: 100px;"/>
+                        <TableColumn fx:id="enrollmentIdColumn" style="-fx-pref-width: 50px;" text="ID" />
+                        <TableColumn fx:id="enrollmentStudentIdColumn" style="-fx-pref-width: 80px;" text="ID студента" />
+                        <TableColumn fx:id="enrollmentElectiveIdColumn" style="-fx-pref-width: 80px;" text="ID факультатива" />
+                        <TableColumn fx:id="enrollmentSemesterIdColumn" style="-fx-pref-width: 80px;" text="ID семестра" />
+                        <TableColumn fx:id="gradeColumn" style="-fx-pref-width: 80px;" text="Оценка" />
+                        <TableColumn fx:id="gradeDateColumn" style="-fx-pref-width: 100px;" text="Дата оценки" />
                     </columns>
                 </TableView>
-                <HBox spacing="10" alignment="CENTER">
-                    <Button fx:id="createEnrollmentButton" text="Создать" onAction="#handleCreateEnrollment" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="editEnrollmentButton" text="Редактировать" onAction="#handleEditEnrollment" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="deleteEnrollmentButton" text="Удалить" onAction="#handleDeleteEnrollment" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <Button fx:id="createEnrollmentButton" onAction="#handleCreateEnrollment" style="-fx-pref-width: 100px;" text="Создать" />
+                    <Button fx:id="editEnrollmentButton" onAction="#handleEditEnrollment" style="-fx-pref-width: 100px;" text="Редактировать" />
+                    <Button fx:id="deleteEnrollmentButton" onAction="#handleDeleteEnrollment" style="-fx-pref-width: 100px;" text="Удалить" />
                 </HBox>
             </VBox>
         </Tab>
         <Tab text="Факультативы">
             <VBox spacing="10">
-                <HBox spacing="10" alignment="CENTER">
-                    <TextField fx:id="filterElectiveIdField" promptText="ID факультатива" style="-fx-pref-width: 100px;"/>
-                    <TextField fx:id="filterElectiveNameField" promptText="Название" style="-fx-pref-width: 150px;"/>
-                    <Button fx:id="filterElectivesButton" text="Фильтр" onAction="#handleFilterElectives" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <TextField fx:id="filterElectiveIdField" promptText="ID факультатива" style="-fx-pref-width: 100px;" />
+                    <TextField fx:id="filterElectiveNameField" promptText="Название" style="-fx-pref-width: 150px;" />
+                    <Button fx:id="filterElectivesButton" onAction="#handleFilterElectives" style="-fx-pref-width: 100px;" text="Фильтр" />
                 </HBox>
                 <TableView fx:id="electivesTable" style="-fx-pref-height: 350px;">
                     <columns>
-                        <TableColumn fx:id="electiveIdTableColumn" text="ID" style="-fx-pref-width: 50px;"/>
-                        <TableColumn fx:id="electiveNameColumn" text="Название" style="-fx-pref-width: 200px;"/>
+                        <TableColumn fx:id="electiveIdTableColumn" style="-fx-pref-width: 50px;" text="ID" />
+                        <TableColumn fx:id="electiveNameColumn" style="-fx-pref-width: 200px;" text="Название" />
+                        <TableColumn fx:id="durationColumn" style="-fx-pref-width: 200px;" text="Продолжительность" />
                     </columns>
                 </TableView>
-                <HBox spacing="10" alignment="CENTER">
-                    <Button fx:id="createElectiveButton" text="Создать" onAction="#handleCreateElective" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="editElectiveButton" text="Редактировать" onAction="#handleEditElective" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="deleteElectiveButton" text="Удалить" onAction="#handleDeleteElective" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <Button fx:id="createElectiveButton" onAction="#handleCreateElective" style="-fx-pref-width: 100px;" text="Создать" />
+                    <Button fx:id="editElectiveButton" onAction="#handleEditElective" style="-fx-pref-width: 100px;" text="Редактировать" />
+                    <Button fx:id="deleteElectiveButton" onAction="#handleDeleteElective" style="-fx-pref-width: 100px;" text="Удалить" />
                 </HBox>
             </VBox>
         </Tab>
         <Tab text="Планы факультативов">
             <VBox spacing="10">
-                <HBox spacing="10" alignment="CENTER">
-                    <TextField fx:id="filterPlanIdField" promptText="ID плана" style="-fx-pref-width: 100px;"/>
-                    <TextField fx:id="filterPlanElectiveIdField" promptText="ID факультатива" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="filterElectivePlansButton" text="Фильтр" onAction="#handleFilterElectivePlans" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <TextField fx:id="filterPlanIdField" promptText="ID плана" style="-fx-pref-width: 100px;" />
+                    <TextField fx:id="filterPlanElectiveIdField" promptText="ID факультатива" style="-fx-pref-width: 100px;" />
+                    <Button fx:id="filterElectivePlansButton" onAction="#handleFilterElectivePlans" style="-fx-pref-width: 100px;" text="Фильтр" />
                 </HBox>
                 <TableView fx:id="electivePlansTable" style="-fx-pref-height: 350px;">
                     <columns>
-                        <TableColumn fx:id="planIdColumn" text="ID плана" style="-fx-pref-width: 80px;"/>
-                        <TableColumn fx:id="planElectiveIdColumn" text="ID факультатива" style="-fx-pref-width: 80px;"/>
-                        <TableColumn fx:id="planSemesterIdColumn" text="ID семестра" style="-fx-pref-width: 80px;"/>
-                        <TableColumn fx:id="lecturesColumn" text="Лекции" style="-fx-pref-width: 80px;"/>
-                        <TableColumn fx:id="practicesColumn" text="Практики" style="-fx-pref-width: 80px;"/>
-                        <TableColumn fx:id="labsColumn" text="Лабы" style="-fx-pref-width: 80px;"/>
+                        <TableColumn fx:id="planIdColumn" style="-fx-pref-width: 80px;" text="ID плана" />
+                        <TableColumn fx:id="planElectiveIdColumn" style="-fx-pref-width: 80px;" text="ID факультатива" />
+                        <TableColumn fx:id="planSemesterIdColumn" style="-fx-pref-width: 80px;" text="ID семестра" />
+                        <TableColumn fx:id="lecturesColumn" style="-fx-pref-width: 80px;" text="Лекции" />
+                        <TableColumn fx:id="practicesColumn" style="-fx-pref-width: 80px;" text="Практики" />
+                        <TableColumn fx:id="labsColumn" style="-fx-pref-width: 80px;" text="Лабы" />
                     </columns>
                 </TableView>
-                <HBox spacing="10" alignment="CENTER">
-                    <Button fx:id="createElectivePlanButton" text="Создать" onAction="#handleCreateElectivePlan" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="editElectivePlanButton" text="Редактировать" onAction="#handleEditElectivePlan" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="deleteElectivePlanButton" text="Удалить" onAction="#handleDeleteElectivePlan" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <Button fx:id="createElectivePlanButton" onAction="#handleCreateElectivePlan" style="-fx-pref-width: 100px;" text="Создать" />
+                    <Button fx:id="editElectivePlanButton" onAction="#handleEditElectivePlan" style="-fx-pref-width: 100px;" text="Редактировать" />
+                    <Button fx:id="deleteElectivePlanButton" onAction="#handleDeleteElectivePlan" style="-fx-pref-width: 100px;" text="Удалить" />
                 </HBox>
             </VBox>
         </Tab>
         <Tab text="Семестры">
             <VBox spacing="10">
-                <HBox spacing="10" alignment="CENTER">
-                    <TextField fx:id="filterSemesterIdField" promptText="ID семестра" style="-fx-pref-width: 100px;"/>
-                    <TextField fx:id="filterSemesterYearField" promptText="Год" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="filterSemestersButton" text="Фильтр" onAction="#handleFilterSemesters" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <TextField fx:id="filterSemesterIdField" promptText="ID семестра" style="-fx-pref-width: 100px;" />
+                    <TextField fx:id="filterSemesterYearField" promptText="Год" style="-fx-pref-width: 100px;" />
+                    <Button fx:id="filterSemestersButton" onAction="#handleFilterSemesters" style="-fx-pref-width: 100px;" text="Фильтр" />
                 </HBox>
                 <TableView fx:id="semestersTable" style="-fx-pref-height: 350px;">
                     <columns>
-                        <TableColumn fx:id="semesterIdColumn" text="ID" style="-fx-pref-width: 50px;"/>
-                        <TableColumn fx:id="yearColumn" text="Год" style="-fx-pref-width: 100px;"/>
-                        <TableColumn fx:id="semesterNumberColumn" text="Номер семестра" style="-fx-pref-width: 100px;"/>
+                        <TableColumn fx:id="semesterIdColumn" style="-fx-pref-width: 50px;" text="ID" />
+                        <TableColumn fx:id="yearColumn" style="-fx-pref-width: 100px;" text="Год" />
+                        <TableColumn fx:id="semesterNumberColumn" style="-fx-pref-width: 100px;" text="Номер семестра" />
                     </columns>
                 </TableView>
-                <HBox spacing="10" alignment="CENTER">
-                    <Button fx:id="createSemesterButton" text="Создать" onAction="#handleCreateSemester" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="editSemesterButton" text="Редактировать" onAction="#handleEditSemester" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="deleteSemesterButton" text="Удалить" onAction="#handleDeleteSemester" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <Button fx:id="createSemesterButton" onAction="#handleCreateSemester" style="-fx-pref-width: 100px;" text="Создать" />
+                    <Button fx:id="editSemesterButton" onAction="#handleEditSemester" style="-fx-pref-width: 100px;" text="Редактировать" />
+                    <Button fx:id="deleteSemesterButton" onAction="#handleDeleteSemester" style="-fx-pref-width: 100px;" text="Удалить" />
                 </HBox>
             </VBox>
         </Tab>
         <Tab text="Кафедры">
             <VBox spacing="10">
-                <HBox spacing="10" alignment="CENTER">
-                    <TextField fx:id="filterDepartmentNameField" promptText="Название кафедры" style="-fx-pref-width: 150px;"/>
-                    <Button fx:id="filterDepartmentsButton" text="Фильтр" onAction="#handleFilterDepartments" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <TextField fx:id="filterDepartmentNameField" promptText="Название кафедры" style="-fx-pref-width: 150px;" />
+                    <Button fx:id="filterDepartmentsButton" onAction="#handleFilterDepartments" style="-fx-pref-width: 100px;" text="Фильтр" />
                 </HBox>
                 <TableView fx:id="departmentsTable" style="-fx-pref-height: 350px;">
                     <columns>
-                        <TableColumn fx:id="departmentNameTableColumn" text="Название" style="-fx-pref-width: 200px;"/>
-                        <TableColumn fx:id="departmentElectiveIdColumn" text="ID факультатива" style="-fx-pref-width: 80px;"/>
+                        <TableColumn fx:id="departmentNameTableColumn" style="-fx-pref-width: 200px;" text="Название" />
+                        <TableColumn fx:id="departmentElectiveIdColumn" style="-fx-pref-width: 80px;" text="ID факультатива" />
                     </columns>
                 </TableView>
-                <HBox spacing="10" alignment="CENTER">
-                    <Button fx:id="createDepartmentButton" text="Создать" onAction="#handleCreateDepartment" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="editDepartmentButton" text="Редактировать" onAction="#handleEditDepartment" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="deleteDepartmentButton" text="Удалить" onAction="#handleDeleteDepartment" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <Button fx:id="createDepartmentButton" onAction="#handleCreateDepartment" style="-fx-pref-width: 100px;" text="Создать" />
+                    <Button fx:id="editDepartmentButton" onAction="#handleEditDepartment" style="-fx-pref-width: 100px;" text="Редактировать" />
+                    <Button fx:id="deleteDepartmentButton" onAction="#handleDeleteDepartment" style="-fx-pref-width: 100px;" text="Удалить" />
                 </HBox>
             </VBox>
         </Tab>
         <Tab text="Роли">
             <VBox spacing="10">
-                <HBox spacing="10" alignment="CENTER">
-                    <TextField fx:id="filterPostIdField" promptText="ID роли" style="-fx-pref-width: 100px;"/>
-                    <TextField fx:id="filterPostNameField" promptText="Название роли" style="-fx-pref-width: 150px;"/>
-                    <Button fx:id="filterPostsButton" text="Фильтр" onAction="#handleFilterPosts" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <TextField fx:id="filterPostIdField" promptText="ID роли" style="-fx-pref-width: 100px;" />
+                    <TextField fx:id="filterPostNameField" promptText="Название роли" style="-fx-pref-width: 150px;" />
+                    <Button fx:id="filterPostsButton" onAction="#handleFilterPosts" style="-fx-pref-width: 100px;" text="Фильтр" />
                 </HBox>
                 <TableView fx:id="postsTable" style="-fx-pref-height: 350px;">
                     <columns>
-                        <TableColumn fx:id="postIdColumn" text="ID" style="-fx-pref-width: 50px;"/>
-                        <TableColumn fx:id="postNameColumn" text="Название роли" style="-fx-pref-width: 200px;"/>
+                        <TableColumn fx:id="postIdColumn" style="-fx-pref-width: 50px;" text="ID" />
+                        <TableColumn fx:id="postNameColumn" style="-fx-pref-width: 200px;" text="Название роли" />
                     </columns>
                 </TableView>
-                <HBox spacing="10" alignment="CENTER">
-                    <Button fx:id="createPostButton" text="Создать" onAction="#handleCreatePost" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="editPostButton" text="Редактировать" onAction="#handleEditPost" style="-fx-pref-width: 100px;"/>
-                    <Button fx:id="deletePostButton" text="Удалить" onAction="#handleDeletePost" style="-fx-pref-width: 100px;"/>
+                <HBox alignment="CENTER" spacing="10">
+                    <Button fx:id="createPostButton" onAction="#handleCreatePost" style="-fx-pref-width: 100px;" text="Создать" />
+                    <Button fx:id="editPostButton" onAction="#handleEditPost" style="-fx-pref-width: 100px;" text="Редактировать" />
+                    <Button fx:id="deletePostButton" onAction="#handleDeletePost" style="-fx-pref-width: 100px;" text="Удалить" />
                 </HBox>
             </VBox>
         </Tab>
